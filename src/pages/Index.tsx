@@ -1,210 +1,176 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import Icon from "@/components/ui/icon";
+import { useState } from "react";
 
 const Index = () => {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background">
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
-              <Icon name="MessageCircle" size={24} className="text-white" />
-            </div>
-            <span className="text-2xl font-bold">МессенджерРФ</span>
-          </div>
-          <Button variant="outline" className="hidden md:flex gap-2">
-            <Icon name="Globe" size={18} />
-            Русский
-          </Button>
-        </div>
-      </nav>
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
-      <section className="pt-32 pb-20 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6 animate-fade-in">
-              <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-                Общайся
-                <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"> свободно</span>
-              </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed">
-                Российский мессенджер нового поколения. Быстро, безопасно и удобно. Все данные хранятся в России.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg h-14 px-8 gap-2">
-                  <Icon name="Download" size={20} />
-                  Скачать для Windows
-                </Button>
-                <Button size="lg" variant="outline" className="text-lg h-14 px-8 gap-2">
-                  <Icon name="Smartphone" size={20} />
-                  Мобильное приложение
-                </Button>
+  const videos = [
+    { id: 1, title: "Как создать канал на YouTube в 2024", views: "1.2М", time: "2 недели назад", duration: "12:45" },
+    { id: 2, title: "10 секретов успешного видео", views: "856К", time: "1 месяц назад", duration: "15:30" },
+    { id: 3, title: "Монтаж для начинающих", views: "2.1М", time: "3 дня назад", duration: "20:15" },
+    { id: 4, title: "Лучшее оборудование для блогера", views: "543К", time: "1 неделя назад", duration: "18:20" },
+    { id: 5, title: "Как раскрутить канал без бюджета", views: "3.5М", time: "2 месяца назад", duration: "25:40" },
+    { id: 6, title: "Тренды YouTube 2024", views: "920К", time: "5 дней назад", duration: "14:55" },
+    { id: 7, title: "Заработок на YouTube: полный гайд", views: "1.8М", time: "3 недели назад", duration: "30:12" },
+    { id: 8, title: "Идеи для видео контента", views: "670К", time: "1 день назад", duration: "10:30" },
+  ];
+
+  const categories = ["Все", "Музыка", "Игры", "Новости", "Спорт", "Технологии", "Образование", "Развлечения"];
+
+  return (
+    <div className="min-h-screen bg-background">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border px-4 py-2">
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <Button variant="ghost" size="icon" onClick={() => setSidebarOpen(!sidebarOpen)}>
+              <Icon name="Menu" size={24} />
+            </Button>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                <Icon name="Play" size={20} className="text-white fill-white ml-0.5" />
               </div>
-              <div className="flex items-center gap-6 pt-4 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <Icon name="Shield" size={16} className="text-primary" />
-                  <span>Шифрование</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Icon name="Zap" size={16} className="text-secondary" />
-                  <span>Высокая скорость</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Icon name="Users" size={16} className="text-primary" />
-                  <span>10М+ пользователей</span>
-                </div>
-              </div>
+              <span className="text-xl font-bold hidden sm:block">YouTube</span>
             </div>
-            
-            <div className="relative animate-scale-in">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-3xl animate-float"></div>
-              <div className="relative bg-gradient-to-br from-primary/10 to-secondary/10 rounded-3xl p-8 border border-primary/20 backdrop-blur-sm">
-                <div className="bg-card rounded-2xl shadow-2xl overflow-hidden">
-                  <div className="bg-gradient-to-r from-primary to-secondary p-4 flex items-center gap-3">
-                    <div className="w-10 h-10 bg-white/20 rounded-full"></div>
-                    <div className="flex-1">
-                      <div className="h-3 bg-white/30 rounded w-32 mb-2"></div>
-                      <div className="h-2 bg-white/20 rounded w-24"></div>
+          </div>
+
+          <div className="flex-1 max-w-2xl">
+            <div className="flex gap-2">
+              <div className="flex-1 flex items-center border border-border rounded-full overflow-hidden">
+                <Input 
+                  placeholder="Поиск" 
+                  className="border-0 focus-visible:ring-0 rounded-none"
+                />
+                <Button variant="ghost" size="icon" className="rounded-none px-6">
+                  <Icon name="Search" size={20} />
+                </Button>
+              </div>
+              <Button variant="ghost" size="icon" className="rounded-full hidden md:flex">
+                <Icon name="Mic" size={20} />
+              </Button>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="icon" className="rounded-full hidden sm:flex">
+              <Icon name="Video" size={20} />
+            </Button>
+            <Button variant="ghost" size="icon" className="rounded-full hidden sm:flex">
+              <Icon name="Bell" size={20} />
+            </Button>
+            <Avatar className="w-8 h-8 cursor-pointer">
+              <AvatarFallback className="bg-primary text-white text-sm font-semibold">А</AvatarFallback>
+            </Avatar>
+          </div>
+        </div>
+      </header>
+
+      <div className="flex pt-14">
+        <aside className={`fixed left-0 top-14 bottom-0 bg-background border-r border-border overflow-y-auto transition-all duration-300 ${sidebarOpen ? 'w-60' : 'w-0 -ml-60'} z-40`}>
+          <div className="p-3 space-y-1">
+            {[
+              { icon: "Home", label: "Главная" },
+              { icon: "Compass", label: "Shorts" },
+              { icon: "Video", label: "Подписки" },
+            ].map((item, i) => (
+              <Button key={i} variant="ghost" className="w-full justify-start gap-6 h-10 hover:bg-muted">
+                <Icon name={item.icon as any} size={20} />
+                <span className="font-medium">{item.label}</span>
+              </Button>
+            ))}
+          </div>
+
+          <div className="border-t border-border my-2"></div>
+
+          <div className="p-3 space-y-1">
+            {[
+              { icon: "History", label: "История" },
+              { icon: "PlaySquare", label: "Ваши видео" },
+              { icon: "Clock", label: "Смотреть позже" },
+              { icon: "ThumbsUp", label: "Понравившиеся" },
+            ].map((item, i) => (
+              <Button key={i} variant="ghost" className="w-full justify-start gap-6 h-10 hover:bg-muted">
+                <Icon name={item.icon as any} size={20} />
+                <span className="font-medium">{item.label}</span>
+              </Button>
+            ))}
+          </div>
+
+          <div className="border-t border-border my-2"></div>
+
+          <div className="p-3">
+            <h3 className="font-semibold mb-3 px-3">Подписки</h3>
+            <div className="space-y-1">
+              {["Канал 1", "Канал 2", "Канал 3", "Канал 4"].map((channel, i) => (
+                <Button key={i} variant="ghost" className="w-full justify-start gap-3 h-10 hover:bg-muted">
+                  <Avatar className="w-6 h-6">
+                    <AvatarFallback className="text-xs">{channel[0]}</AvatarFallback>
+                  </Avatar>
+                  <span className="font-medium">{channel}</span>
+                </Button>
+              ))}
+            </div>
+          </div>
+        </aside>
+
+        <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'ml-60' : 'ml-0'}`}>
+          <div className="sticky top-14 bg-background border-b border-border z-30">
+            <div className="flex gap-3 px-6 py-3 overflow-x-auto">
+              {categories.map((cat, i) => (
+                <Button 
+                  key={i} 
+                  variant={i === 0 ? "default" : "secondary"} 
+                  size="sm"
+                  className={`rounded-lg whitespace-nowrap ${i === 0 ? 'bg-secondary text-white hover:bg-secondary/90' : ''}`}
+                >
+                  {cat}
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          <div className="p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {videos.map((video) => (
+                <Card key={video.id} className="border-0 shadow-none cursor-pointer group">
+                  <div className="relative aspect-video bg-muted rounded-xl overflow-hidden mb-3">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/40"></div>
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="w-16 h-16 bg-black/80 rounded-full flex items-center justify-center">
+                        <Icon name="Play" size={32} className="text-white fill-white ml-1" />
+                      </div>
+                    </div>
+                    <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded">
+                      {video.duration}
                     </div>
                   </div>
-                  <div className="p-4 space-y-3">
-                    {[1, 2, 3].map((i) => (
-                      <div key={i} className="flex items-start gap-3">
-                        <div className="w-8 h-8 bg-muted rounded-full"></div>
-                        <div className="flex-1 space-y-2">
-                          <div className="h-2 bg-muted rounded w-20"></div>
-                          <div className="bg-primary/10 rounded-2xl p-3">
-                            <div className="h-2 bg-muted rounded w-full mb-2"></div>
-                            <div className="h-2 bg-muted rounded w-3/4"></div>
-                          </div>
-                        </div>
+                  
+                  <div className="flex gap-3">
+                    <Avatar className="w-9 h-9 flex-shrink-0">
+                      <AvatarFallback className="text-xs">К{video.id}</AvatarFallback>
+                    </Avatar>
+                    
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-sm line-clamp-2 mb-1 group-hover:text-primary transition-colors">
+                        {video.title}
+                      </h3>
+                      <p className="text-xs text-muted-foreground">Канал автора</p>
+                      <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                        <span>{video.views} просмотров</span>
+                        <span>•</span>
+                        <span>{video.time}</span>
                       </div>
-                    ))}
+                    </div>
                   </div>
-                </div>
-              </div>
+                </Card>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="py-20 px-4 bg-muted/30">
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-            Почему выбирают нас
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: "Lock",
-                title: "Защита данных",
-                description: "Сквозное шифрование всех сообщений. Ваши данные под надёжной защитой.",
-                color: "from-primary to-blue-500"
-              },
-              {
-                icon: "Rocket",
-                title: "Молниеносная скорость",
-                description: "Облачная синхронизация и мгновенная доставка сообщений на всех устройствах.",
-                color: "from-secondary to-purple-500"
-              },
-              {
-                icon: "Heart",
-                title: "Простота использования",
-                description: "Интуитивный интерфейс, знакомый каждому. Никаких сложностей.",
-                color: "from-pink-500 to-red-500"
-              }
-            ].map((feature, index) => (
-              <Card key={index} className="p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 bg-card">
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4`}>
-                  <Icon name={feature.icon as any} size={28} className="text-white" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-            Доступно на всех платформах
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { icon: "Monitor", name: "Windows", color: "bg-blue-500" },
-              { icon: "Apple", name: "macOS", color: "bg-gray-700" },
-              { icon: "Smartphone", name: "iOS", color: "bg-primary" },
-              { icon: "Smartphone", name: "Android", color: "bg-green-500" }
-            ].map((platform, index) => (
-              <Card key={index} className="p-8 text-center hover:shadow-lg transition-all hover:scale-105 cursor-pointer border-2 border-transparent hover:border-primary">
-                <div className={`w-16 h-16 ${platform.color} rounded-2xl flex items-center justify-center mx-auto mb-4`}>
-                  <Icon name={platform.icon as any} size={32} className="text-white" />
-                </div>
-                <h3 className="font-semibold text-lg">{platform.name}</h3>
-              </Card>
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Button size="lg" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white text-lg h-14 px-12 gap-2">
-              <Icon name="Download" size={20} />
-              Скачать сейчас
-            </Button>
-            <p className="text-sm text-muted-foreground mt-4">
-              Бесплатно для всех платформ
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <footer className="bg-muted/50 py-12 px-4 border-t border-border">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
-                  <Icon name="MessageCircle" size={18} className="text-white" />
-                </div>
-                <span className="font-bold text-lg">МессенджерРФ</span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Современный российский мессенджер для безопасного общения
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-3">Продукт</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-primary transition-colors">Возможности</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Безопасность</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Для бизнеса</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-3">Поддержка</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-primary transition-colors">Справка</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">FAQ</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Контакты</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-3">Мы в соцсетях</h4>
-              <div className="flex gap-3">
-                {["Phone", "Mail", "Globe"].map((icon, i) => (
-                  <a key={i} href="#" className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
-                    <Icon name={icon as any} size={18} />
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            © 2024 МессенджерРФ. Все права защищены.
-          </div>
-        </div>
-      </footer>
+        </main>
+      </div>
     </div>
   );
 };
